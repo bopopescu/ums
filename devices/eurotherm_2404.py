@@ -36,7 +36,7 @@ class eurotherm_2404( minimalmodbus.Instrument ):
 
     Args:
         * portname (str): port name
-        * slaveaddress (int): slave address in the range 1 to 247
+        * subordinateaddress (int): subordinate address in the range 1 to 247
 
     Implemented with these function codes (in decimal):
         
@@ -57,7 +57,7 @@ class eurotherm_2404( minimalmodbus.Instrument ):
 
     """
     
-    def __init__(self, portname, slaveaddress=1):
+    def __init__(self, portname, subordinateaddress=1):
         self.oven_name = str(portname)
         self.oven_constant = 0.000078 # default value
         if "/" not in portname: # means instead of a serial port name, a pseudoname has been used
@@ -69,7 +69,7 @@ class eurotherm_2404( minimalmodbus.Instrument ):
                 self.oven_constant = 0
                 self.oven_name = ""
                 sys.exit("No furnace with the name: \""+str(portname)+"\" has been found. Is the controller really Eurotherm 2404? Don't you think it's a Eurotherm 2416 or 3216? Either use a correct pseudoname or address the serial port directly (See manual)")
-        minimalmodbus.Instrument.__init__(self, portname, slaveaddress=1)
+        minimalmodbus.Instrument.__init__(self, portname, subordinateaddress=1)
         self.room_temperature = 23
         print "###########################################################################"
         print "       "+self.oven_name+" (with id: "+str(self.get_id())+")"

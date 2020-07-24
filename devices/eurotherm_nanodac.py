@@ -28,7 +28,7 @@ class eurotherm_nanodac( minimalmodbus.Instrument ):
 
     Args:
         * portname (str): port name
-        * slaveaddress (int): slave address in the range 1 to 247
+        * subordinateaddress (int): subordinate address in the range 1 to 247
 
     Implemented with these function codes (in decimal):
         
@@ -41,8 +41,8 @@ class eurotherm_nanodac( minimalmodbus.Instrument ):
 
     """
     
-    def __init__(self, portname, slaveaddress=1):
-        minimalmodbus.Instrument.__init__(self, portname, slaveaddress)
+    def __init__(self, portname, subordinateaddress=1):
+        minimalmodbus.Instrument.__init__(self, portname, subordinateaddress)
         self.room_temperature = 23
         
     ## Process value

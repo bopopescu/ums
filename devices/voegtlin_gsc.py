@@ -44,13 +44,13 @@ class voegtlin_gsc( minimalmodbus.Instrument ):
     read_string(self, registeraddress, numberOfRegisters=16, functioncode=3)
     write_string(self, registeraddress, textstring, numberOfRegisters=16)
     
-    !! Long integers (32 bits = 4 bytes) are stored in two consecutive 16-bit registers in the slave
+    !! Long integers (32 bits = 4 bytes) are stored in two consecutive 16-bit registers in the subordinate
     read_long(self, registeraddress, functioncode=3, signed=False)
     write_long(self, registeraddress, value, signed=False)
     
     Args:
         * portname (str): port name
-        * slaveaddress (int): slave address in the range 1 to 247
+        * subordinateaddress (int): subordinate address in the range 1 to 247
 
     Implemented with these function codes (in decimal):
         
@@ -64,14 +64,14 @@ class voegtlin_gsc( minimalmodbus.Instrument ):
 
     """
     
-    def __init__(self, portname, slaveaddresses, voegtlin_debug=False, stop_bits=2):
-        if type(slaveaddresses)==float or type(slaveaddresses)==int:
-            slaveaddresses = [int(slaveaddresses)] # make an array
-        minimalmodbus.Instrument.__init__(self, portname, slaveaddresses[0], stop_bits=2) # connect to the first one
+    def __init__(self, portname, subordinateaddresses, voegtlin_debug=False, stop_bits=2):
+        if type(subordinateaddresses)==float or type(subordinateaddresses)==int:
+            subordinateaddresses = [int(subordinateaddresses)] # make an array
+        minimalmodbus.Instrument.__init__(self, portname, subordinateaddresses[0], stop_bits=2) # connect to the first one
         # sort out all addresses where no device is present
         self.mfc_addresses = []
         self.voegtlin_debug = voegtlin_debug
-        for test_address in slaveaddresses:
+        for test_address in subordinateaddresses:
             if self.set_flowmeter_address(test_address):
                 self.mfc_addresses.append(test_address)
         return

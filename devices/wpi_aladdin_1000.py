@@ -29,7 +29,7 @@ class wpi_aladdin_1000():
 
     Args:
         * portname (str): port name
-        * slaveaddress (int): slave address. default 0
+        * subordinateaddress (int): subordinate address. default 0
 
 
 
@@ -55,9 +55,9 @@ class wpi_aladdin_1000():
     
        
     """    
-    def __init__(self, portname, slaveaddress=0):
+    def __init__(self, portname, subordinateaddress=0):
         self.debug = True
-        self.slaveaddress = slaveaddress
+        self.subordinateaddress = subordinateaddress
         self.pump_name = str(portname)
         self.CR = '\x0D'
         self.STX = '\x02'
@@ -78,9 +78,9 @@ class wpi_aladdin_1000():
     
     ## Process value
     def write(self,message):
-        self.interface.write(str(self.slaveaddress)+" "+message+self.CR)
+        self.interface.write(str(self.subordinateaddress)+" "+message+self.CR)
         if self.debug:
-            print "Just wrote:",str(self.slaveaddress)+" "+message
+            print "Just wrote:",str(self.subordinateaddress)+" "+message
         return
      
     def read(self):
